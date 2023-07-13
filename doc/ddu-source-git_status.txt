@@ -1,0 +1,37 @@
+*ddu-source-git_status.txt*	git status source for ddu.vim
+
+This source collects result of `git status`
+
+See |ddu-kind-git_status| for available item actions.
+
+It displays path only.
+If you need status column, please use |ddu-converter-git_status|
+or you can create new converter. |ddu-create-filter|
+
+==============================================================================
+INSTALL                                        *ddu-source-git_status-install*
+
+Please install |ddu| and |denops.vim|
+
+https://github.com/Shougo/ddu.vim
+https://github.com/vim-denops/denops.vim
+
+==============================================================================
+EXAMPLES                                      *ddu-source-git_status-examples*
+
+Setting example is place to `./ddu-git_status-example.ts` (|gf| to see it)
+>
+	call ddu#start(#{ sources: [#{ name: 'git_status' }] })
+
+  " To use repository of current file,
+  " Please set |ddu-source-option-path|
+	call ddu#start(#{
+ 	\   sources: [#{
+ 	\     name: 'git_status',
+ 	\     options: #{
+ 	\       path: expand('%:p'),
+ 	\     },
+ 	\   }],
+ 	\ })
+<
+vim:tw=78:sw=2:ts=2:ft=help:norl:nowrap:
