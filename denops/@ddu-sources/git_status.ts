@@ -1,10 +1,10 @@
 import { ActionData } from "../@ddu-kinds/git_status.ts";
-import { dirname } from "https://deno.land/std@0.193.0/path/mod.ts";
+import { dirname } from "https://deno.land/std@0.194.0/path/mod.ts";
 import {
   BaseSource,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v3.3.3/base/source.ts";
-import { Item } from "https://deno.land/x/ddu_vim@v3.3.3/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.4.2/base/source.ts";
+import { Item } from "https://deno.land/x/ddu_vim@v3.4.2/types.ts";
 
 type Params = Record<never, never>;
 
