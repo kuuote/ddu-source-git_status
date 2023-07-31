@@ -69,11 +69,11 @@ export class Source extends BaseSource<Params> {
             output.split("\n").filter((line) => line.length !== 0)
           );
         controller.enqueue(status.map((line) => {
-          const path = line.replace(/^..."?/, "").replace(/"?$/, "");
+          const displayPath = line.replace(/^..."?/, "").replace(/"?$/, "");
           return {
-            word: path,
+            word: displayPath,
             action: {
-              path,
+              path: displayPath.replace(/.*-> /, ""), // trim rename mark
               //previewType,
               worktree: this.worktree,
               status: line.slice(0, 3),
