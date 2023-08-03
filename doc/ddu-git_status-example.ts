@@ -1,11 +1,11 @@
-import * as stdpath from "https://deno.land/std@0.194.0/path/mod.ts";
-import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.4.2/base/config.ts";
+import * as stdpath from "https://deno.land/std@0.196.0/path/mod.ts";
+import { ConfigArguments } from "https://deno.land/x/ddu_vim@v3.4.5/base/config.ts";
 import {
   ActionArguments,
   ActionFlags,
   BaseConfig,
-} from "https://deno.land/x/ddu_vim@v3.4.2/types.ts";
-import * as u from "https://deno.land/x/unknownutil@v3.2.0/mod.ts";
+} from "https://deno.land/x/ddu_vim@v3.4.5/types.ts";
+import * as u from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
 
 type Never = Record<never, never>;
 

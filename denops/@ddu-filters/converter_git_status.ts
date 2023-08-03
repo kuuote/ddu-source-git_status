@@ -1,11 +1,11 @@
 import { ActionData } from "../@ddu-kinds/git_status.ts";
-import { FilterArguments } from "https://deno.land/x/ddu_vim@v3.4.2/base/filter.ts";
+import { FilterArguments } from "https://deno.land/x/ddu_vim@v3.4.5/base/filter.ts";
 import {
   BaseFilter,
   DduItem,
   Item,
   ItemHighlight,
-} from "https://deno.land/x/ddu_vim@v3.4.2/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.4.5/types.ts";
 
 const defaultParams = {
   highlightAdded: "diffAdded",
