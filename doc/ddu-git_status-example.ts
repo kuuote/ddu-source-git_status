@@ -6,14 +6,9 @@ import {
   BaseConfig,
 } from "https://deno.land/x/ddu_vim@v3.4.5/types.ts";
 import * as u from "https://deno.land/x/unknownutil@v3.4.0/mod.ts";
+import { ActionData as GitStatusActionData } from "https://pax.deno.dev/kuuote/ddu-source-git_status@v1.0.0/denops/@ddu-kinds/git_status.ts";
 
 type Never = Record<never, never>;
-
-export type GitStatusActionData = {
-  status: string;
-  path: string;
-  worktree: string;
-};
 
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
