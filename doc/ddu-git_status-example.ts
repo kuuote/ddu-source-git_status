@@ -18,6 +18,7 @@ export type GitStatusActionData = {
 export class Config extends BaseConfig {
   override config(args: ConfigArguments): Promise<void> {
     args.contextBuilder.patchGlobal({
+      ui: "ff",
       sourceOptions: {
         git_status: {
           converters: ["converter_git_status"],
