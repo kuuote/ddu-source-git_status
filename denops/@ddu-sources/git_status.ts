@@ -64,12 +64,13 @@ export class Source extends BaseSource<Params> {
           "status",
           "-uall",
           "--porcelain=v1",
+          "-z",
         ])
           .then((output) =>
-            output.split("\n").filter((line) => line.length !== 0)
+            output.split("\0").filter((line) => line.length !== 0)
           );
         controller.enqueue(status.map((line) => {
-          const displayPath = line.replace(/^..."?/, "").replace(/"?$/, "");
+          const displayPath = line.replace(/^.../, "");
           return {
             word: displayPath,
             action: {
