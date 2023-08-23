@@ -1,6 +1,6 @@
 *ddu-kind-git_status.txt*	git status kind for ddu.vim
 
-This kind provides entry type of `git status` result and actions.
+This is |ddu-kinds| provides entry type of `git status` result and actions.
 
 ==============================================================================
 EXAMPLES                                        *ddu-kind-git_status-examples*

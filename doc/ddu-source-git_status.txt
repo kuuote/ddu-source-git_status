@@ -1,6 +1,6 @@
 *ddu-source-git_status.txt*	git status source for ddu.vim
 
-This source collects result of `git status`
+This is |ddu-sources| collect result of `git status`
 
 See |ddu-kind-git_status| for available item actions.
 
