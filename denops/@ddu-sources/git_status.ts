@@ -1,11 +1,11 @@
 import { ActionData } from "../@ddu-kinds/git_status.ts";
-import { dirname } from "https://deno.land/std@0.196.0/path/mod.ts";
+import { dirname } from "https://deno.land/std@0.212.0/path/mod.ts";
 import {
   BaseSource,
   GatherArguments,
   OnInitArguments,
-} from "https://deno.land/x/ddu_vim@v3.4.5/base/source.ts";
-import { Item } from "https://deno.land/x/ddu_vim@v3.4.5/types.ts";
+} from "https://deno.land/x/ddu_vim@v3.10.0/base/source.ts";
+import { Item } from "https://deno.land/x/ddu_vim@v3.10.0/types.ts";
 
 const defaultParams = {
   omitStatusColumn: false,
