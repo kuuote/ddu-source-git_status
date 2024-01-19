@@ -4,8 +4,7 @@ This is |ddu-sources| collect result of `git status`
 
 See |ddu-kind-git_status| for available item actions.
 
-It displays path only.
-If you need status column, please use |ddu-converter-git_status|
+If you need status column highlight, please use |ddu-converter-git_status|
 or you can create new converter. |ddu-create-filter|
 
 ==============================================================================
@@ -34,4 +33,12 @@ Setting example is place to `./ddu-git_status-example.ts` (|gf| to see it)
  	\   }],
  	\ })
 <
+
+==============================================================================
+PARAMS                                          *ddu-source-git_status-params*
+
+                                *ddu-source-git_status-param-omitStatusColumn*
+omitStatusColumn (boolean)
+        Omit status column.
+
 vim:tw=78:sw=2:ts=2:ft=help:norl:nowrap:

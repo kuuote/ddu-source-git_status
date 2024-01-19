@@ -4,7 +4,6 @@ import {
   BaseFilter,
   DduItem,
   Item,
-  ItemHighlight,
 } from "https://deno.land/x/ddu_vim@v3.4.5/types.ts";
 
 const defaultParams = {
@@ -22,25 +21,22 @@ export class Filter extends BaseFilter<Params> {
     const { highlightAdded, highlightRemoved } = args.filterParams;
     const highlightEnabled = highlightAdded !== "" || highlightRemoved !== "";
     const items = args.items as Item<ActionData>[];
-    const newItems = items.map((item) => {
+    for (const item of items) {
       const status = String(item.action?.status);
-      const display = item.display ?? item.word;
-      const newItem = {
-        ...item,
-        display: status + display,
-      };
-      if (newItem.highlights != null) {
-        newItem.highlights = newItem.highlights.map((hl) => ({
-          ...hl,
-          col: hl.col + status.length,
-        }));
-      } else {
-        newItem.highlights = [];
+      // add status if omitted
+      if (!item.display?.startsWith(status)) {
+        item.display = status + item.display;
+        if (item.highlights != null) {
+          item.highlights = item.highlights.map((hl) => ({
+            ...hl,
+            col: hl.col + status.length,
+          }));
+        }
       }
       if (highlightEnabled) {
-        const highlights: ItemHighlight[] = [];
+        item.highlights ??= [];
         if (status === "?? " || status.includes("U")) {
-          highlights.push({
+          item.highlights.push({
             name: NAME_REMOVED,
             hl_group: highlightRemoved,
             col: 1,
@@ -48,7 +44,7 @@ export class Filter extends BaseFilter<Params> {
           });
         } else {
           if (status[0] !== " ") {
-            highlights.push({
+            item.highlights.push({
               name: NAME_ADDED,
               hl_group: highlightAdded,
               col: 1,
@@ -56,7 +52,7 @@ export class Filter extends BaseFilter<Params> {
             });
           }
           if (status[1] !== " ") {
-            highlights.push({
+            item.highlights.push({
               name: NAME_REMOVED,
               hl_group: highlightRemoved,
               col: 2,
@@ -64,13 +60,9 @@ export class Filter extends BaseFilter<Params> {
             });
           }
         }
-        newItem.highlights.push(
-          ...highlights.filter((hl) => hl.hl_group !== ""),
-        );
       }
-      return newItem;
-    });
-    return Promise.resolve(newItems as DduItem[]);
+    }
+    return Promise.resolve(items as DduItem[]);
   }
 
   params(): Params {

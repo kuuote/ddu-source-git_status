@@ -16,6 +16,7 @@ export class Config extends BaseConfig {
       ui: "ff",
       sourceOptions: {
         git_status: {
+          // highlight status column
           converters: ["converter_git_status"],
           // or if you like directory highlight like fzf-preview,
           // you can use converter_hl_dir

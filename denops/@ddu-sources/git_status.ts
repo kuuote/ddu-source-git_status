@@ -2,11 +2,16 @@ import { ActionData } from "../@ddu-kinds/git_status.ts";
 import { dirname } from "https://deno.land/std@0.196.0/path/mod.ts";
 import {
   BaseSource,
+  GatherArguments,
   OnInitArguments,
 } from "https://deno.land/x/ddu_vim@v3.4.5/base/source.ts";
 import { Item } from "https://deno.land/x/ddu_vim@v3.4.5/types.ts";
 
-type Params = Record<never, never>;
+const defaultParams = {
+  omitStatusColumn: false,
+};
+
+type Params = typeof defaultParams;
 
 const run = async (cmd: string[], cwd?: string): Promise<string> => {
   if (cwd == null) {
@@ -54,7 +59,9 @@ export class Source extends BaseSource<Params> {
       );
   }
 
-  override gather(): ReadableStream<Array<Item<ActionData>>> {
+  override gather(
+    args: GatherArguments<Params>,
+  ): ReadableStream<Array<Item<ActionData>>> {
     return new ReadableStream({
       start: async (controller) => {
         const status = await run([
@@ -70,12 +77,12 @@ export class Source extends BaseSource<Params> {
             output.split("\0").filter((line) => line.length !== 0)
           );
         controller.enqueue(status.map((line) => {
-          const displayPath = line.replace(/^.../, "");
+          const pathLine = line.slice(3);
           return {
-            word: displayPath,
+            word: pathLine,
+            display: args.sourceParams.omitStatusColumn ? pathLine : line,
             action: {
-              path: displayPath.replace(/.*-> /, ""), // trim rename mark
-              //previewType,
+              path: pathLine.replace(/.*-> /, ""), // trim rename mark
               worktree: this.worktree,
               status: line.slice(0, 3),
             },
@@ -87,6 +94,6 @@ export class Source extends BaseSource<Params> {
   }
 
   override params(): Params {
-    return {};
+    return defaultParams;
   }
 }

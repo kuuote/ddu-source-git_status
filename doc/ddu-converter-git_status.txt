@@ -1,6 +1,7 @@
 *ddu-converter-git_status.txt*	git status converter for ddu.vim
 
-This converter is |ddu-filters| add status column to |ddu-kind-git_status| item
+This converter is add status column (if omit it) and highlights for
+|ddu-kind-git_status| item.
 
 ==============================================================================
 EXAMPLES                                   *ddu-converter-git_status-examples*
