@@ -73,9 +73,19 @@ export class Source extends BaseSource<Params> {
           "--porcelain=v1",
           "-z",
         ])
-          .then((output) =>
-            output.split("\0").filter((line) => line.length !== 0)
-          );
+          .then((output) => {
+            const lines = output.split("\0");
+            const filteredLines: string[] = [];
+            for (let i = 0; i < lines.length; i++) {
+              if (lines[i].length !== 0) {
+                filteredLines.push(lines[i]);
+                if (lines[i].startsWith("R")) {
+                  i++;
+                }
+              }
+            }
+            return filteredLines;
+          });
         controller.enqueue(status.map((line) => {
           const pathLine = line.slice(3);
           return {
