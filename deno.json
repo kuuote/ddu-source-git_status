@@ -1,0 +1,8 @@
+{
+  "name": "@kuuote/ddu-kind-git-status",
+  "version": "1.1.0",
+  "exports": "./denops/@ddu-kinds/git_status.ts",
+  "tasks": {
+    "check": "deno fmt --check denops && deno lint"
+  }
+} 

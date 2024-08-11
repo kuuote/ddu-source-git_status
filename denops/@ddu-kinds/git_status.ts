@@ -1,15 +1,15 @@
-import * as path from "https://deno.land/std@0.220.1/path/mod.ts";
+import { ensure, is, maybe } from "jsr:@core/unknownutil@^4.0.0";
 import {
   BaseKind,
-  GetPreviewerArguments,
-} from "https://deno.land/x/ddu_vim@v3.10.3/base/kind.ts";
+  type GetPreviewerArguments,
+} from "jsr:@shougo/ddu-vim@^5.0.0/kind";
 import {
-  ActionArguments,
+  type ActionArguments,
   ActionFlags,
-  DduItem,
-  Previewer,
-} from "https://deno.land/x/ddu_vim@v3.10.3/types.ts";
-import * as u from "https://deno.land/x/unknownutil@v3.17.0/mod.ts";
+  type DduItem,
+  type Previewer,
+} from "jsr:@shougo/ddu-vim@^5.0.0/types";
+import * as path from "jsr:@std/path@^1.0.0";
 
 export type ActionData = {
   status: string; // like "MM "
@@ -59,20 +59,20 @@ export class Kind extends BaseKind<Never> {
       return ActionFlags.RefreshItems;
     },
     executeGit: async (args) => {
-      const gitArgs = u.ensure(
+      const gitArgs = ensure(
         args.actionParams,
-        u.isObjectOf({
-          args: u.isArrayOf(u.isString),
+        is.ObjectOf({
+          args: is.ArrayOf(is.String),
         }),
       ).args;
       await executeGit(gitArgs, args.items);
       return ActionFlags.RefreshItems;
     },
     open: async (args) => {
-      const command = u.maybe(
+      const command = maybe(
         args.actionParams,
-        u.isObjectOf({
-          command: u.isString,
+        is.ObjectOf({
+          command: is.String,
         }),
       )?.command ?? "edit";
       const worktree = getWorktree(args.items[0]);
