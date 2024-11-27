@@ -76,7 +76,11 @@ export class Kind extends BaseKind<Never> {
         }),
       )?.command ?? "edit";
       const worktree = getWorktree(args.items[0]);
-      for (const filePath of getPathes(args.items)) {
+      const pathes = await Promise.all(
+        getPathes(args.items)
+          .map((p) => args.denops.call("fnameescape", p) as Promise<string>),
+      );
+      for (const filePath of pathes) {
         await args.denops.cmd(command + " " + path.join(worktree, filePath));
       }
       return ActionFlags.None;
